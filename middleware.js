@@ -1,6 +1,7 @@
 import arcjet, { createMiddleware, detectBot, shield } from "@arcjet/next";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { createUserIfNotExists } from "./lib/user";
 
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
@@ -30,11 +31,21 @@ const aj = arcjet({
 
 // Create base Clerk middleware
 const clerk = clerkMiddleware(async (auth, req) => {
-  const { userId } = await auth();
+  const { userId, user } = await auth();
 
   if (!userId && isProtectedRoute(req)) {
     const { redirectToSignIn } = await auth();
     return redirectToSignIn();
+  }
+
+  // Create user in database if they exist in Clerk but not in our database
+  if (userId && user) {
+    try {
+      await createUserIfNotExists(user);
+    } catch (error) {
+      console.error("Error creating user:", error);
+      // Continue even if user creation fails - we'll handle it in the app
+    }
   }
 
   return NextResponse.next();
