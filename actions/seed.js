@@ -81,6 +81,19 @@ export async function seedTransactions() {
 
     // Insert transactions in batches and update account balance
     await db.$transaction(async (tx) => {
+      // Create account if it doesn't exist
+      const account = await tx.account.upsert({
+        where: { id: ACCOUNT_ID },
+        update: {},
+        create: {
+          id: ACCOUNT_ID,
+          name: "Main Account",
+          type: "CHECKING",
+          balance: 0,
+          userId: USER_ID,
+        },
+      });
+
       // Clear existing transactions
       await tx.transaction.deleteMany({
         where: { accountId: ACCOUNT_ID },
