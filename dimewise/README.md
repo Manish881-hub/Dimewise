@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dimewise - AI-Powered Finance Management
 
-## Getting Started
+Dimewise is a modern, AI-powered finance management application built with Next.js that helps users manage their finances intelligently and efficiently.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- AI-powered financial insights and recommendations
+- Secure user authentication with Clerk
+- Modern, responsive UI built with Tailwind CSS
+- Real-time financial tracking and analytics
+- Email notifications and updates
+- Interactive charts and data visualization
+- Dark/Light mode support
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Framework:** Next.js 15
+- **Authentication:** Clerk
+- **Database:** Prisma
+- **AI Integration:** Google Generative AI
+- **Styling:** Tailwind CSS
+- **UI Components:** Radix UI
+- **Form Handling:** React Hook Form
+- **Data Visualization:** Recharts
+- **Email:** Resend
+- **State Management:** React Hooks
+- **Type Safety:** Zod
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📋 Prerequisites
 
-## Learn More
+- Node.js (Latest LTS version recommended)
+- npm or yarn
+- Git
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com//dimewise.git
+   cd dimewise
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-## Deploy on Vercel
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add the following variables:
+   ```
+   # Add your environment variables here
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## 📦 Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint
+- `npm run email` - Start the email development server
+
+## 🔧 Configuration
+
+The project uses several configuration files:
+- `next.config.mjs` - Next.js configuration
+- `tailwind.config.js` - Tailwind CSS configuration
+- `prisma/schema.prisma` - Database schema
+- `.eslintrc.json` - ESLint configuration
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Next.js team for the amazing framework
+- Vercel for hosting and deployment
+- All the open-source contributors and libraries used in this project
