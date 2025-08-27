@@ -1,70 +1,60 @@
-import arcjet, { createMiddleware, detectBot, shield } from "@arcjet/next";
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+// middleware.js
 import { NextResponse } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import arcjet, { createMiddleware, detectBot, shield } from "@arcjet/next";
 import { createUserIfNotExists } from "./lib/user";
 
+// ✅ Polyfill for Arcjet (fixes "performance is not defined" on Vercel)
+import { performance } from "node:perf_hooks";
+if (!globalThis.performance) {
+  globalThis.performance = performance;
+}
+
+// Define protected routes
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
   "/account(.*)",
   "/transaction(.*)",
 ]);
 
-// Create Arcjet middleware
+// Arcjet setup
 const aj = arcjet({
   key: process.env.ARCJET_KEY,
-  // characteristics: ["userId"], // Track based on Clerk userId
   rules: [
-    // Shield protection for content and security
-    shield({
-      mode: "LIVE",
-    }),
+    shield({ mode: "LIVE" }),
     detectBot({
-      mode: "LIVE", // will block requests. Use "DRY_RUN" to log only
-      allow: [
-        "CATEGORY:SEARCH_ENGINE", // Google, Bing, etc
-        "GO_HTTP", // For Inngest
-        // See the full list at https://arcjet.com/bot-list
-      ],
+      mode: "LIVE",
+      allow: ["CATEGORY:SEARCH_ENGINE", "GO_HTTP"],
     }),
   ],
 });
 
-// Create base Clerk middleware
+// Clerk middleware
 const clerk = clerkMiddleware(async (auth, req) => {
-  const { userId, user } = await auth();
+  const { userId, user, redirectToSignIn } = await auth();
 
   if (!userId && isProtectedRoute(req)) {
-    const { redirectToSignIn } = await auth();
     return redirectToSignIn();
   }
 
-  // Create user in database if they exist in Clerk but not in our database
   if (userId && user) {
     try {
       await createUserIfNotExists(user);
     } catch (error) {
       console.error("Error creating user:", error);
-      // Continue even if user creation fails - we'll handle it in the app
     }
   }
 
   return NextResponse.next();
 });
 
-// Use only Clerk middleware in development
+// ✅ Use Arcjet + Clerk in production, only Clerk in dev
 export default process.env.NODE_ENV === "production"
   ? createMiddleware(aj, clerk)
   : clerk;
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
     "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };
