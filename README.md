@@ -19,7 +19,7 @@ Dimewise is a modern, AI-powered finance management application built with Next.
 - **Database:** Prisma
 - **AI Integration:** Google Generative AI
 - **Styling:** Tailwind CSS
-- **UI Components:** Radix UI
+- **UI Components:** Shadcn UI
 - **Form Handling:** React Hook Form
 - **Data Visualization:** Recharts
 - **Email:** Resend
