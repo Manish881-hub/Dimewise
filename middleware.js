@@ -4,14 +4,10 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import arcjet, { createMiddleware, detectBot, shield } from "@arcjet/next";
 import { createUserIfNotExists } from "./lib/user";
 
-// ✅ Arcjet polyfill (fixes localhost + Vercel issues)
-try {
-  const { performance } = require("node:perf_hooks");
-  if (!globalThis.performance) {
-    globalThis.performance = performance;
-  }
-} catch (err) {
-  console.warn("performance polyfill failed:", err);
+// ✅ Polyfill for Arcjet (fixes "performance is not defined" on Vercel)
+import { performance } from "node:perf_hooks";
+if (!globalThis.performance) {
+  globalThis.performance = performance;
 }
 
 // Define protected routes
@@ -52,11 +48,13 @@ const clerk = clerkMiddleware(async (auth, req) => {
   return NextResponse.next();
 });
 
-// ✅ Only Clerk in dev, Arcjet+Clerk in prod
+// ✅ Use Arcjet + Clerk in production, only Clerk in dev
 export default process.env.NODE_ENV === "production"
   ? createMiddleware(aj, clerk)
   : clerk;
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+  ],
 };
