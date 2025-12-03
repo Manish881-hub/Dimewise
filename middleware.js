@@ -23,8 +23,8 @@ const aj = arcjet({
   rules: [
     shield({ mode: "LIVE" }),
     detectBot({
-      mode: "LIVE",
-      allow: ["CATEGORY:SEARCH_ENGINE", "GO_HTTP"],
+      mode: "DRY_RUN",
+      allow: ["CATEGORY:SEARCH_ENGINE", "GO_HTTP", "CATEGORY:PREVIEW"],
     }),
   ],
 });
