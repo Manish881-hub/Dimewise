@@ -1,93 +1,189 @@
-# Dimewise - AI-Powered Finance Management
+🚀 Dimewise — AI-Powered Finance Management Platform
 
-Dimewise is a modern, AI-powered finance management application built with Next.js that helps users manage their finances intelligently and efficiently.
+Dimewise is an intelligent, full-stack finance management application built with Next.js 15, designed to help users track, analyze, and optimize their finances using AI-driven insights.
+It focuses on usability, performance, clean UI, and real-time financial awareness — making budgeting smarter and more intuitive.
 
-## 🚀 Features
+✨ Key Features
 
-- AI-powered financial insights and recommendations
-- Secure user authentication with Clerk
-- Modern, responsive UI built with Tailwind CSS
-- Real-time financial tracking and analytics
-- Email notifications and updates
-- Interactive charts and data visualization
-- Dark/Light mode support
+AI-powered financial insights (Google Generative AI)
 
-## 🛠️ Tech Stack
+Secure authentication using Clerk (MFA, sessions, user management)
 
-- **Framework:** Next.js 15
-- **Authentication:** Clerk
-- **Database:** Prisma
-- **AI Integration:** Google Generative AI
-- **Styling:** Tailwind CSS
-- **UI Components:** Shadcn UI
-- **Form Handling:** React Hook Form
-- **Data Visualization:** Recharts
-- **Email:** Resend
-- **State Management:** React Hooks
-- **Type Safety:** Zod
+Modern, responsive UI built with Tailwind CSS + Shadcn UI
 
-## 📋 Prerequisites
+Real-time tracking of income, expenses, and categories
 
-- Node.js (Latest LTS version recommended)
-- npm or yarn
-- Git
+Interactive dashboards with Recharts
 
-## 🚀 Getting Started
+Email notifications powered by Resend
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com//dimewise.git
-   cd dimewise
-   ```
+Dark/Light mode built-in
 
-2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+Schema-safe forms using Zod + React Hook Form
 
-3. Set up environment variables:
-   Create a `.env` file in the root directory and add the following variables:
-   ```
-   # Add your environment variables here
-   ```
+🧰 Tech Stack
+Supabase + Prisma ORM for scalable database operations
+| Category             | Technologies                 |
+| -------------------- | ---------------------------- |
+| **Framework**        | Next.js 15                   |
+| **Authentication**   | Clerk                        |
+| **Database & ORM**   | Supabase PostgreSQL + Prisma |
+| **AI Integration**   | Google Generative AI         |
+| **Styling**          | Tailwind CSS, Shadcn UI      |
+| **Forms**            | React Hook Form + Zod        |
+| **Charts**           | Recharts                     |
+| **Email**            | Resend                       |
+| **State Management** | React Hooks                  |
+| **Hosting**          | Vercel                       |
 
-4. Run the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+📚 Project Process (How It Was Built)
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+1. Planning & Architecture
 
-## 📦 Available Scripts
+Designed the entire workflow: dashboard → transactions → analytics → AI insights.
 
-- `npm run dev` - Start the development server
-- `npm run build` - Build the application for production
-- `npm run start` - Start the production server
-- `npm run lint` - Run ESLint
-- `npm run email` - Start the email development server
+Planned the database using Prisma schema-first approach.
 
-## 🔧 Configuration
+Structured the project using Next.js app router best practices.
 
-The project uses several configuration files:
-- `next.config.mjs` - Next.js configuration
-- `tailwind.config.js` - Tailwind CSS configuration
-- `prisma/schema.prisma` - Database schema
-- `.eslintrc.json` - ESLint configuration
+2. Authentication Setup
 
-## 🤝 Contributing
+Implemented Clerk for login, sign-up, session handling, and protecting routes.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Added middleware for redirecting unauthorized users.
 
-## 📝 License
+3. Core Features Development
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Built transaction CRUD operations.
 
-## 🙏 Acknowledgments
+Created analytics pages with charts and filters.
 
-- Next.js team for the amazing framework
-- Vercel for hosting and deployment
-- All the open-source contributors and libraries used in this project
+Integrated Google AI for smart financial summaries.
+
+4. Email + Notification System
+
+Added Resend for transactional emails (budget alerts, summaries).
+
+5. UI/UX Design
+
+Built a clean design using Tailwind + Shadcn.
+
+Ensured responsive layouts for mobile, tablet & desktop.
+
+6. Deployment & Versioning
+
+Deployed to Vercel with proper environment configuration.
+
+Added linting, type checking, and production optimization.
+
+📘 What I Learned
+
+Working on Dimewise helped me grow in multiple areas:
+
+Full-stack development with Next.js App Router
+
+Building scalable database models using Prisma
+
+Using Clerk for real-world secure authentication
+
+Integrating AI in real applications
+
+Writing clean, modular TypeScript code
+
+Using React Hook Form + Zod for fully type-safe forms
+
+Building modern UI with Shadcn components
+
+Creating production-grade deployments on Vercel
+
+Error handling, middleware, and route protection
+
+Managing email workflows using Resend
+
+📈 Overall Growth Through This Project
+
+This project significantly improved my skills:
+
+Stronger understanding of clean architecture
+
+Better state management & component composition
+
+Stronger command of TypeScript in real applications
+
+Learned how to build dashboard-based apps
+
+More confidence in AI-based feature implementation
+
+Improved debugging & testing skills
+
+Learned practical deployment and environment handling
+
+🚀 Future Improvements (Upcoming Enhancements)
+
+🧾 Recurring transaction automation (Inngest)
+
+📱 PWA support for mobile usage
+
+💳 Payment reminders
+
+🔐 Role-based access
+
+📊 More AI models for deeper trend predictions
+
+🌍 Multi-language support
+
+👥 Multi-user team/household budget sharing
+
+🏦 Bank integration (Plaid-like)
+
+🛠️ Getting Started (Run the Project Locally)
+1️⃣ Clone the Repository
+git clone https://github.com/Manish881-hub/dimewise.git
+cd dimewise
+
+2️⃣ Install Dependencies
+npm install
+# or
+yarn install
+
+3️⃣ Environment Variables
+
+Create a .env file in the root folder and include:
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+DATABASE_URL=
+GOOGLE_GENAI_KEY=
+RESEND_API_KEY=
+
+4️⃣ Run Development Server
+npm run dev
+# or
+yarn dev
+Open → http://localhost:3000
+
+📦 Available Scripts
+| Script          | Purpose                  |
+| --------------- | ------------------------ |
+| `npm run dev`   | Run development server   |
+| `npm run build` | Build production version |
+| `npm run start` | Run production server    |
+| `npm run email` | Run email preview server |
+| `npm run lint`  | Lint and fix issues      |
+
+🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+Feel free to open a Pull Request.
+
+🙏 Acknowledgements
+
+Next.js for the foundation
+
+Clerk for seamless authentication
+
+Supabase + Prisma for a powerful backend
+
+Google AI for financial insights
+
+Open-source community for tools & inspiration
