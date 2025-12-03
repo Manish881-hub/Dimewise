@@ -17,6 +17,7 @@ export function ReceiptScanner({ onScanComplete }) {
   } = useFetch(scanReceipt);
 
   const handleReceiptScan = async (file) => {
+    console.log("handleReceiptScan called with file:", file.name, file.size);
     if (file.size > 5 * 1024 * 1024) {
       toast.error("File size should be less than 5MB");
       return;
@@ -25,6 +26,7 @@ export function ReceiptScanner({ onScanComplete }) {
     const formData = new FormData();
     formData.append("file", file);
 
+    console.log("Calling scanReceiptFn...");
     await scanReceiptFn(formData);
   };
 
@@ -45,6 +47,7 @@ export function ReceiptScanner({ onScanComplete }) {
         capture="environment"
         onChange={(e) => {
           const file = e.target.files?.[0];
+          console.log("File selected:", file);
           if (file) handleReceiptScan(file);
         }}
       />
