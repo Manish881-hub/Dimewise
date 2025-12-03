@@ -22,7 +22,10 @@ export function ReceiptScanner({ onScanComplete }) {
       return;
     }
 
-    await scanReceiptFn(file);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    await scanReceiptFn(formData);
   };
 
   useEffect(() => {
