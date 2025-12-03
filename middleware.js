@@ -4,11 +4,11 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import arcjet, { createMiddleware, detectBot, shield } from "@arcjet/next";
 import { createUserIfNotExists } from "./lib/user";
 
-// ✅ Polyfill for Arcjet (fixes "performance is not defined" on Vercel)
-import { performance } from "node:perf_hooks";
-if (!globalThis.performance) {
-  globalThis.performance = performance;
-}
+
+
+
+
+
 
 // Define protected routes
 const isProtectedRoute = createRouteMatcher([
