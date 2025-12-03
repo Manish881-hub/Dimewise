@@ -9,6 +9,29 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Dimewise",
   description: "One stop Finance Platform",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://dimewise.vercel.app"),
+  openGraph: {
+    title: "Dimewise",
+    description: "One stop Finance Platform",
+    url: "https://dimewise.vercel.app",
+    siteName: "Dimewise",
+    images: [
+      {
+        url: "/banner.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Dimewise Banner",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dimewise",
+    description: "One stop Finance Platform",
+    images: ["/banner.jpeg"],
+  },
 };
 
 export default function RootLayout({ children }) {
