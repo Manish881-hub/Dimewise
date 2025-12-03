@@ -229,6 +229,7 @@ export async function getUserTransactions(query = {}) {
 
 // Scan Receipt
 export async function scanReceipt(formData) {
+  console.log("scanReceipt action called");
   try {
     const file = formData.get("file");
     if (!file) {
@@ -291,7 +292,7 @@ export async function scanReceipt(formData) {
     }
   } catch (error) {
     console.error("Error scanning receipt:", error);
-    throw new Error("Failed to scan receipt");
+    throw new Error(error.message || "Failed to scan receipt");
   }
 }
 
