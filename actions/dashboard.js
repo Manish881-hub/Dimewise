@@ -5,14 +5,15 @@ import { db } from "@/lib/prisma";
 import { request } from "@arcjet/next";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { toNumber } from "@/lib/utils";
 
 const serializeTransaction = (obj) => {
   const serialized = { ...obj };
   if (obj.balance) {
-    serialized.balance = obj.balance.toNumber();
+    serialized.balance = toNumber(obj.balance);
   }
   if (obj.amount) {
-    serialized.amount = obj.amount.toNumber();
+    serialized.amount = toNumber(obj.amount);
   }
   return serialized;
 };

@@ -3,14 +3,15 @@
 import { db } from "@/lib/prisma";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { toNumber } from "@/lib/utils";
 
 const serializeDecimal = (obj) => {
   const serialized = { ...obj };
   if (obj.balance) {
-    serialized.balance = obj.balance.toNumber();
+    serialized.balance = toNumber(obj.balance);
   }
   if (obj.amount) {
-    serialized.amount = obj.amount.toNumber();
+    serialized.amount = toNumber(obj.amount);
   }
   return serialized;
 };
@@ -143,7 +144,7 @@ export async function updateDefaultAccount(accountId) {
     });
 
     revalidatePath("/dashboard");
-    return { success: true, data: serializeTransaction(account) };
+    return { success: true, data: serializeDecimal(account) };
   } catch (error) {
     return { success: false, error: error.message };
   }

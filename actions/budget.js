@@ -3,6 +3,7 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { toNumber } from "@/lib/utils";
 
 export async function getCurrentBudget(accountId) {
   try {
@@ -52,9 +53,9 @@ export async function getCurrentBudget(accountId) {
     });
 
     return {
-      budget: budget ? { ...budget, amount: budget.amount.toNumber() } : null,
+      budget: budget ? { ...budget, amount: toNumber(budget.amount) } : null,
       currentExpenses: expenses._sum.amount
-        ? expenses._sum.amount.toNumber()
+        ? toNumber(expenses._sum.amount)
         : 0,
     };
   } catch (error) {
@@ -91,7 +92,7 @@ export async function updateBudget(amount) {
     revalidatePath("/dashboard");
     return {
       success: true,
-      data: { ...budget, amount: budget.amount.toNumber() },
+      data: { ...budget, amount: toNumber(budget.amount) },
     };
   } catch (error) {
     console.error("Error updating budget:", error);

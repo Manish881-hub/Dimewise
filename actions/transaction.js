@@ -6,12 +6,13 @@ import { revalidatePath } from "next/cache";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import aj from "@/lib/arcjet";
 import { request } from "@arcjet/next";
+import { toNumber } from "@/lib/utils";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const serializeAmount = (obj) => ({
   ...obj,
-  amount: obj.amount.toNumber(),
+  amount: toNumber(obj.amount),
 });
 
 // Create Transaction
@@ -67,7 +68,7 @@ export async function createTransaction(data) {
 
     // Calculate new balance
     const balanceChange = data.type === "EXPENSE" ? -data.amount : data.amount;
-    const newBalance = account.balance.toNumber() + balanceChange;
+    const newBalance = toNumber(account.balance) + balanceChange;
 
     // Create transaction and update account balance
     const transaction = await db.$transaction(async (tx) => {
@@ -148,8 +149,8 @@ export async function updateTransaction(id, data) {
     // Calculate balance changes
     const oldBalanceChange =
       originalTransaction.type === "EXPENSE"
-        ? -originalTransaction.amount.toNumber()
-        : originalTransaction.amount.toNumber();
+        ? -toNumber(originalTransaction.amount)
+        : toNumber(originalTransaction.amount);
 
     const newBalanceChange =
       data.type === "EXPENSE" ? -data.amount : data.amount;
