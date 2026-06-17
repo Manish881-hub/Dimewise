@@ -104,7 +104,6 @@ export function AddTransactionForm({
       if (scannedData.category) {
         setValue("category", scannedData.category);
       }
-      toast.success("Receipt scanned successfully");
     }
   };
 

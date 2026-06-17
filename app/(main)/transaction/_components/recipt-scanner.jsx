@@ -31,11 +31,10 @@ export function ReceiptScanner({ onScanComplete }) {
   };
 
   useEffect(() => {
-    if (scannedData && !scanReceiptLoading) {
+    if (scannedData && scanReceiptLoading === false) {
       onScanComplete(scannedData);
-      toast.success("Receipt scanned successfully");
     }
-  }, [scanReceiptLoading, scannedData]);
+  }, [scanReceiptLoading, scannedData, onScanComplete]);
 
   return (
     <div className="flex items-center gap-4">
